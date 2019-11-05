@@ -28,6 +28,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    // { src: "~/plugins/p5.js", ssr: false }
   ],
   /*
   ** Nuxt.js modules
