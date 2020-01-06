@@ -13,11 +13,17 @@ export default {
       speed: 2,
       speed2: 2,
       posX: 0,
-      posX2: 1
+      posX2: 1,
+      flag: true
     };
   },
   mounted() {
     new P5(this.script);
+    window.onclick = () => {
+      console.log("click");
+      this.flag = !this.flag;
+      console.log(this.flag);
+    };
   },
   methods: {
     script(p5) {
@@ -99,26 +105,32 @@ export default {
         // console.log(p5.frameCount);
         const y = p5.sin(p5.radians(degree)) * 50;
 
-        p5.push();
-        p5.translate(50, p5.height / 4);
-        p5.fill(255, 50, 50);
-        p5.ellipse(this.posX, y, 50, 50);
-        p5.pop();
+        if (this.flag) {
+          p5.push();
+          p5.translate(50, p5.height / 4);
+          p5.fill(255, 50, 50);
+          p5.ellipse(this.posX, y, 50, 50);
+          p5.pop();
 
-        p5.push();
-        p5.translate(100, p5.height / 2);
-        p5.fill(255, 255, 0);
-        p5.ellipse(this.posX, y, 50, 50);
-        p5.pop();
+          p5.push();
+          p5.translate(100, p5.height / 2);
+          p5.fill(255, 255, 0);
+          p5.ellipse(this.posX, y, 50, 50);
+          p5.pop();
 
-        p5.push();
-        p5.translate(0, p5.height / 3);
-        p5.fill(255, 204, 100);
-        p5.ellipse(this.posX2, y, 50, 50);
-        p5.pop();
+          p5.push();
+          p5.translate(0, p5.height / 3);
+          p5.fill(255, 204, 100);
+          p5.ellipse(p5.mouseX, p5.mouseY - 200, 50, 50);
+          p5.pop();
 
-        this.posX += this.speed;
-        this.posX2 += this.speed2;
+          this.posX += this.speed;
+          this.posX2 += this.speed2;
+        } else {
+          this.posX += 0;
+          this.posX2 += 0;
+        }
+
         if (
           (this.posX > p5.width && this.posX2 > p5.width) ||
           (this.posX < 0 && this.posX2 < 0)
