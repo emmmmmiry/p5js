@@ -14,56 +14,33 @@ export default {
     return {
       img: "",
       colors: [],
-      sortMode: null,
-      width: 600,
-      height: 600
+      sortMode: null
     };
   },
   mounted() {
-    // new P5(this.script);
-    window.onclick = () => {
-      console.log("scroll");
-      new P5(this.draw);
-    };
+    new P5(this.script);
   },
   methods: {
-    // script(p5) {
-    //   const setImage = loadImageFile => {
-    //     this.img = loadImageFile;
-    //   };
-    //   p5.preload = () => {
-    //     p5.loadImage(require("@/assets/pic1.jpg"), setImage);
-    //   };
-
-    //   p5.setup = () => {
-    //     // const width = window.innerWidth;
-    //     // const height = window.innerHeight;
-    //     // p5.createCanvas(width, height);
-    //     // p5.noCoursor();
-    //     // p5.noStroke();
-    //   };
-    // },
-    draw(p5) {
+    script(p5) {
       const setImage = loadImageFile => {
         this.img = loadImageFile;
       };
-
       p5.preload = () => {
         p5.loadImage(require("@/assets/pic1.jpg"), setImage);
       };
 
       p5.setup = () => {
-        const max = 300;
-        const min = 100;
-        const width = Math.floor(Math.random() * (max + 1 - min)) + min;
-        const height = Math.floor(Math.random() * (max + 1 - min)) + min;
-        p5.createCanvas(width, height);
+        // const width = window.innerWidth;
+        // const height = window.innerHeight;
+        // p5.createCanvas(width, height);
+        p5.createCanvas(600, 600);
+        // p5.noCoursor();
+        // p5.noStroke();
       };
-      // new P5(this.script);
+
       p5.draw = () => {
         // max() 2つの入力のうち大きい値を選ぶ
-        // const mouseX = p5.mouseX > 400 ? 400 : p5.mouseX;
-        const tileCount = p5.floor(p5.width / p5.max(p5.mouseX / 5, 5));
+        const tileCount = p5.floor(p5.width / p5.max(p5.mouseX, 5));
         // console.log(tileCount, p5.width, p5.max(p5.mouseX, 5), "tileCount");
 
         const rectSize = p5.width / tileCount; // 5
@@ -112,7 +89,6 @@ export default {
           for (let gridX = 0; gridX < tileCount; gridX++) {
             p5.fill(this.colors[i]);
             p5.rect(gridX * rectSize, gridY * rectSize, rectSize, rectSize);
-            p5.strokeWeight(0);
             i++;
           }
         }
