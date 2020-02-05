@@ -22,9 +22,8 @@ export default {
   mounted() {
     // new P5(this.script);
     window.onclick = () => {
-      const p5 = new P5(this.draw);
-      // p5.canvas.offsetTop = 100;
-      // p5.canvas.offsetLeft = 500;
+      console.log("scroll");
+      new P5(this.draw);
     };
   },
   methods: {
@@ -58,10 +57,7 @@ export default {
         const min = 100;
         const width = Math.floor(Math.random() * (max + 1 - min)) + min;
         const height = Math.floor(Math.random() * (max + 1 - min)) + min;
-        const cnv = p5.createCanvas(width, height);
-        const x = Math.floor(Math.random() * window.innerWidth + 0);
-        const y = Math.floor(Math.random() * window.innerHeight + 0);
-        cnv.position(x, y);
+        p5.createCanvas(width, height);
       };
       // new P5(this.script);
       p5.draw = () => {
@@ -125,9 +121,3 @@ export default {
   }
 };
 </script>
-
-<style>
-canvas {
-  position: absolute;
-}
-</style>
