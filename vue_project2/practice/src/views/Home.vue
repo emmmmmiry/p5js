@@ -14,13 +14,22 @@ export default {
       colors: [],
       sortMode: null,
       x: 0,
-      y: 0
+      y: 0,
+      imgs: [
+        require("@/assets/pic1.jpg"),
+        require("@/assets/pic2.jpg"),
+        require("@/assets/pic3.jpg"),
+        require("@/assets/pic4.jpg"),
+        require("@/assets/pic5.jpg")
+      ]
     };
   },
   mounted() {
+    // 毎フレームやってるのを間引く
+    // 重いのはfor文を減らすなどコードを最適化するしかない
+
     window.onclick = e => {
       const p5 = new P5(this.draw);
-
       this.x = e.pageX - 50;
       this.y = e.pageY - 50;
     };
@@ -32,15 +41,8 @@ export default {
       };
 
       p5.preload = () => {
-        const imgs = [
-          require("@/assets/pic1.jpg"),
-          require("@/assets/pic2.jpg"),
-          require("@/assets/pic3.jpg"),
-          require("@/assets/pic4.jpg"),
-          require("@/assets/pic5.jpg")
-        ];
         const i = Math.floor(Math.random() * (5 - 0)) + 0;
-        const img = imgs[i];
+        const img = this.imgs[i];
         p5.loadImage(img, setImage);
       };
 
