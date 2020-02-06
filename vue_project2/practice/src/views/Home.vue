@@ -32,9 +32,6 @@ export default {
       };
 
       p5.preload = () => {
-        // const imgPath = path => {
-        //   return require(`${path}`);
-        // };
         const imgs = [
           require("@/assets/pic1.jpg"),
           require("@/assets/pic2.jpg"),
@@ -43,9 +40,7 @@ export default {
           require("@/assets/pic5.jpg")
         ];
         const i = Math.floor(Math.random() * (5 - 0)) + 0;
-        console.log(i);
         const img = imgs[i];
-        console.log(img);
         p5.loadImage(img, setImage);
       };
 
@@ -56,9 +51,12 @@ export default {
         const height = Math.floor(Math.random() * (max + 1 - min)) + min;
 
         const cnv = p5.createCanvas(width, height);
+        cnv.canvas.width = width;
+        cnv.canvas.height = height;
+        console.log(cnv.canvas.width, "width");
         // const x = Math.floor(Math.random() * window.innerWidth + 0);
         // const y = Math.floor(Math.random() * window.innerHeight + 0);
-        console.log(this.x, this.y);
+        console.log(p5, this.x, this.y, width, height);
         cnv.position(this.x, this.y);
       };
       // new P5(this.script);
