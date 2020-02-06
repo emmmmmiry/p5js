@@ -3,8 +3,6 @@
 </template>
 
 <script>
-// p5のbuild前のファイルを移植する
-// import gd from "@/assets/js/lib/generative-design-library/generative-design-library";
 import P5 from "p5";
 
 export default {
@@ -15,35 +13,19 @@ export default {
       img: "",
       colors: [],
       sortMode: null,
-      width: 600,
-      height: 600
+      x: 0,
+      y: 0
     };
   },
   mounted() {
-    // new P5(this.script);
-    window.onclick = () => {
+    window.onclick = e => {
       const p5 = new P5(this.draw);
-      // p5.canvas.offsetTop = 100;
-      // p5.canvas.offsetLeft = 500;
+
+      this.x = e.pageX - 50;
+      this.y = e.pageY - 50;
     };
   },
   methods: {
-    // script(p5) {
-    //   const setImage = loadImageFile => {
-    //     this.img = loadImageFile;
-    //   };
-    //   p5.preload = () => {
-    //     p5.loadImage(require("@/assets/pic1.jpg"), setImage);
-    //   };
-
-    //   p5.setup = () => {
-    //     // const width = window.innerWidth;
-    //     // const height = window.innerHeight;
-    //     // p5.createCanvas(width, height);
-    //     // p5.noCoursor();
-    //     // p5.noStroke();
-    //   };
-    // },
     draw(p5) {
       const setImage = loadImageFile => {
         this.img = loadImageFile;
@@ -58,17 +40,17 @@ export default {
         const min = 100;
         const width = Math.floor(Math.random() * (max + 1 - min)) + min;
         const height = Math.floor(Math.random() * (max + 1 - min)) + min;
+
         const cnv = p5.createCanvas(width, height);
-        const x = Math.floor(Math.random() * window.innerWidth + 0);
-        const y = Math.floor(Math.random() * window.innerHeight + 0);
-        cnv.position(x, y);
+        // const x = Math.floor(Math.random() * window.innerWidth + 0);
+        // const y = Math.floor(Math.random() * window.innerHeight + 0);
+        console.log(this.x, this.y);
+        cnv.position(this.x, this.y);
       };
       // new P5(this.script);
       p5.draw = () => {
         // max() 2つの入力のうち大きい値を選ぶ
-        // const mouseX = p5.mouseX > 400 ? 400 : p5.mouseX;
         const tileCount = p5.floor(p5.width / p5.max(p5.mouseX / 5, 5));
-        // console.log(tileCount, p5.width, p5.max(p5.mouseX, 5), "tileCount");
 
         const rectSize = p5.width / tileCount; // 5
 
@@ -87,13 +69,6 @@ export default {
 
             // xがでかいとiがthis.img.pixels.lengthよりも大きくなって
             // this.img.pixels[i]がundifinedになる
-            // そもそもこのiはなんだ
-            // console.log(
-            //   this.img.pixels[i],
-            //   i,
-            //   this.img.pixels.length,
-            //   "this.img.pixels[i],"
-            // );
             let c = p5.color(
               this.img.pixels[i], // r
               this.img.pixels[i + 1], // g
