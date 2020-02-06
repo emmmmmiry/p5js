@@ -32,7 +32,21 @@ export default {
       };
 
       p5.preload = () => {
-        p5.loadImage(require("@/assets/pic1.jpg"), setImage);
+        // const imgPath = path => {
+        //   return require(`${path}`);
+        // };
+        const imgs = [
+          require("@/assets/pic1.jpg"),
+          require("@/assets/pic2.jpg"),
+          require("@/assets/pic3.jpg"),
+          require("@/assets/pic4.jpg"),
+          require("@/assets/pic5.jpg")
+        ];
+        const i = Math.floor(Math.random() * (5 - 0)) + 0;
+        console.log(i);
+        const img = imgs[i];
+        console.log(img);
+        p5.loadImage(img, setImage);
       };
 
       p5.setup = () => {
@@ -50,7 +64,7 @@ export default {
       // new P5(this.script);
       p5.draw = () => {
         // max() 2つの入力のうち大きい値を選ぶ
-        const tileCount = p5.floor(p5.width / p5.max(p5.mouseX / 5, 5));
+        const tileCount = p5.floor(p5.width / p5.max(p5.mouseX / 5, 2));
 
         const rectSize = p5.width / tileCount; // 5
 
@@ -102,6 +116,14 @@ export default {
 </script>
 
 <style>
+.home {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #370083;
+}
 canvas {
   position: absolute;
 }
